@@ -20,7 +20,15 @@ open class WebSocketConfiguration : WebSocketMessageBrokerConfigurer{
 	override fun configureMessageBroker(registry: MessageBrokerRegistry){
 		
 		registry.setApplicationDestinationPrefixes("/app")
-			.enableSimpleBroker("/chat")
+				.enableStompBrokerRelay("/topic", "/queue")
+				
+				
+			.setRelayHost("localhost")
+			 .setRelayPort(61613)
+			 .setClientLogin("guest")
+			 .setClientPasscode("guest")
+			 .setSystemLogin("guest")
+			 .setSystemPasscode("guest")
 		
 	}
 	

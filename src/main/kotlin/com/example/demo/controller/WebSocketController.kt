@@ -13,9 +13,19 @@ class WebSocketController {
 	@Autowired
 	lateinit var template: SimpMessagingTemplate
 	
-	@MessageMapping("send/message")
+	@MessageMapping("send/msg/tocrime")
 	fun onReceiveMessage(message: String){
-		template.convertAndSend("/chat", SimpleDateFormat("HH:mm:ss").format(Date()) + "-"+ message)
+		template.convertAndSend("/topic/crime", SimpleDateFormat("HH:mm:ss").format(Date()) + "-"+ message)
+	}
+	
+	@MessageMapping("send/msg/toadmin")
+	fun onReceiveMessageToAdmin(message: String){
+		template.convertAndSend("/queue/toadmin", SimpleDateFormat("HH:mm:ss").format(Date()) + "-rk-"+ message)
+	}
+	
+	@MessageMapping("send/msg/toratikanta")
+	fun onReceiveMessageToratikanta(message: String){
+		template.convertAndSend("/queue/toratikanta", SimpleDateFormat("HH:mm:ss").format(Date()) + "-rk-"+ message)
 	}
 	
 }
